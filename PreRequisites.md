@@ -1,8 +1,10 @@
-Good Generate links for CompSci Students
+Good Generate links for CompSci Students and Development in general
 
 https://www.youtube.com/watch?v=xHCQOOzphz8
 
 https://www.youtube.com/watch?v=K-L189UDQMo
+
+https://www.youtube.com/watch?v=2NvjPEiRjfE
 
 
 
