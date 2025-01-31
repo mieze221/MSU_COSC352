@@ -18,6 +18,8 @@ Language List
 | 14 | Kotlin | [kotlinlang.org](https://kotlinlang.org) | A modern, concise language fully interoperable with Java, widely used in Android development. |
 | 15 | Lua | [lua.org](https://www.lua.org) | A lightweight, embeddable scripting language known for its speed and simplicity. |
 | 16 | Mojo | [modular.com/mojo](https://www.modular.com/mojo) | A high-performance language for AI and systems programming, blending Python usability with C-like speed. |
-| 17 | Rust | [rust-lang.org](https://www.rust-lang.org) | A language focused on safety, concurrency, and performance, preventing memory-related bugs. |
-| 18 | Scala | [scala-lang.org](https://www.scala-lang.org) | Combines object-oriented and functional programming paradigms, running on the JVM. |
-| 19 | Zig | [ziglang.org](https://ziglang.org) | A robust, optimal systems programming language emphasizing safety and simplicity. |
+| 17 | R | [r-project.org](https://www.r-project.org) | A language specialized for statistical computing and data visualization, widely used in data science. |
+| 18 | Rust | [rust-lang.org](https://www.rust-lang.org) | A language focused on safety, concurrency, and performance, preventing memory-related bugs. |
+| 19 | Scala | [scala-lang.org](https://www.scala-lang.org) | Combines object-oriented and functional programming paradigms, running on the JVM. |
+| 20 | TypeScript | [typescriptlang.org](https://www.typescriptlang.org) | A statically typed superset of JavaScript that compiles to plain JavaScript, enhancing web development. |
+| 21 | Zig | [ziglang.org](https://ziglang.org) | A robust, optimal systems programming language emphasizing safety and simplicity. |
