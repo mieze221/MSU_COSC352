@@ -1,28 +1,30 @@
-Here's the updated table with Zig, D, Lua, and Scala crossed out:
+Here's the updated table sorted alphabetically and including the site references for Brainfuck and Whitespace:  
 
-| #  | Language  | Difficulty (1-5) | Docker Support | Official Docker Image / Docs |
-|----|----------|-----------------|---------------|----------------------|
-| 1  | [Ballerina](https://ballerina.io) | 🟢 2 | ✅ Yes | [ballerina/docker-ballerina](https://hub.docker.com/r/ballerina/ballerina) |
-| 2  | [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) | 🟢 2 | ✅ Yes | [mcr.microsoft.com/dotnet](https://hub.docker.com/_/microsoft-dotnet-sdk) |
-| 3  | [Ceylon](https://ceylon-lang.org) | 🔴 4 | ⚠️ Limited | No official image; can be set up manually with OpenJDK |
-| 4  | [Clojure](https://clojure.org) | 🔴 4 | ✅ Yes | [clojure](https://hub.docker.com/_/clojure) |
-| ~~5~~  | ~~[D](https://dlang.org)~~ | ~~🟠 3~~ | ~~✅ Yes~~ | ~~[dlang](https://hub.docker.com/_/dlang)~~ |
-| 6  | [Dart](https://dart.dev) | 🟢 2 | ✅ Yes | [dart](https://hub.docker.com/_/dart) |
-| 7  | [Erlang](https://www.erlang.org) | 🔴 5 | ✅ Yes | [erlang](https://hub.docker.com/_/erlang) |
-| 8  | [Elixir](https://elixir-lang.org) | 🟠 3 | ✅ Yes | [elixir](https://hub.docker.com/_/elixir) |
-| 9  | [Gleam](https://gleam.run) | 🟠 3 | ⚠️ Limited | No official image; can be set up manually using Erlang/Elixir images |
-| 10 | [Go](https://golang.org) | 🟢 2 | ✅ Yes | [golang](https://hub.docker.com/_/golang) |
-| 11 | [Groovy](https://groovy-lang.org) | 🟢 2 | ✅ Yes | [groovy](https://hub.docker.com/_/groovy) |
-| 12 | [Hack](https://hacklang.org) | 🟠 3 | ⚠️ Limited | No official image; can be run with HHVM ([hhvm/hhvm](https://hub.docker.com/r/hhvm/hhvm)) |
-| 13 | [Haskell](https://www.haskell.org) | 🔴 5 | ✅ Yes | [haskell](https://hub.docker.com/_/haskell) |
-| 14 | [Julia](https://julialang.org) | 🟠 3 | ✅ Yes | [julia](https://hub.docker.com/_/julia) |
-| 15 | [Kotlin](https://kotlinlang.org) | 🟢 2 | ✅ Yes | [kotlin](https://hub.docker.com/r/jetbrains/kotlin) |
-| ~~16~~ | ~~[Lua](https://www.lua.org)~~ | ~~🟢 1~~ | ~~✅ Yes~~ | ~~[lua](https://hub.docker.com/_/lua)~~ |
-| 17 | [Mojo](https://www.modular.com/mojo) | 🔴 5 | ⚠️ Limited | No official Docker image yet; requires setup with Modular's environment |
-| 18 | [R](https://www.r-project.org) | 🟠 3 | ✅ Yes | [r-base](https://hub.docker.com/_/r-base) |
-| 19 | [Rust](https://www.rust-lang.org) | 🔴 5 | ✅ Yes | [rust](https://hub.docker.com/_/rust) |
-| ~~20~~ | ~~[Scala](https://www.scala-lang.org)~~ | ~~🔴 4~~ | ~~✅ Yes~~ | ~~[scala](https://hub.docker.com/_/hseeberger/scala-sbt)~~ |
-| 21 | [TypeScript](https://www.typescriptlang.org) | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
-| ~~22~~ | ~~[Zig](https://ziglang.org)~~ | ~~🔴 5~~ | ~~⚠️ Limited~~ | ~~No official image; can be set up manually with Alpine/Ubuntu~~ |
+| #  | Language  | Assigned | Difficulty (1-5) | Docker Support | Official Docker Image / Docs |
+|----|----------|----------|-----------------|---------------|----------------------|
+| 1  | [Ballerina](https://ballerina.io) | Open | 🟢 2 | ✅ Yes | [ballerina/docker-ballerina](https://hub.docker.com/r/ballerina/ballerina) |
+| 2  | [Brainfuck](https://esolangs.org/wiki/Brainfuck) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
+| 3  | [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) | Jordan Bigby | 🟢 2 | ✅ Yes | [mcr.microsoft.com/dotnet](https://hub.docker.com/_/microsoft-dotnet-sdk) |
+| 4  | [Ceylon](https://ceylon-lang.org) | Open | 🔴 4 | ⚠️ Limited | No official image; can be set up manually with OpenJDK |
+| 5  | [Clojure](https://clojure.org) | Kaitlyn Pearson | 🔴 4 | ✅ Yes | [clojure](https://hub.docker.com/_/clojure) |
+| 6  | [D](https://dlang.org) | Delancy Johnson | 🟠 3 | ✅ Yes | [dlang](https://hub.docker.com/_/dlang) |
+| 7  | [Dart](https://dart.dev) | Open | 🟢 2 | ✅ Yes | [dart](https://hub.docker.com/_/dart) |
+| 8  | [Elixir](https://elixir-lang.org) | Claimed | 🟠 3 | ✅ Yes | [elixir](https://hub.docker.com/_/elixir) |
+| 9  | [Erlang](https://www.erlang.org) | Open | 🔴 5 | ✅ Yes | [erlang](https://hub.docker.com/_/erlang) |
+| 10 | [Gleam](https://gleam.run) | Open | 🟠 3 | ⚠️ Limited | No official image; can be set up manually using Erlang/Elixir images |
+| 11 | [Go](https://golang.org) | Open | 🟢 2 | ✅ Yes | [golang](https://hub.docker.com/_/golang) |
+| 12 | [Groovy](https://groovy-lang.org) | Open | 🟢 2 | ✅ Yes | [groovy](https://hub.docker.com/_/groovy) |
+| 13 | [Hack](https://hacklang.org) | Open | 🟠 3 | ⚠️ Limited | No official image; can be run with HHVM ([hhvm/hhvm](https://hub.docker.com/r/hhvm/hhvm)) |
+| 14 | [Haskell](https://www.haskell.org) | Open | 🔴 5 | ✅ Yes | [haskell](https://hub.docker.com/_/haskell) |
+| 15 | [Julia](https://julialang.org) | Open | 🟠 3 | ✅ Yes | [julia](https://hub.docker.com/_/julia) |
+| 16 | [Kotlin](https://kotlinlang.org) | Open | 🟢 2 | ✅ Yes | [kotlin](https://hub.docker.com/r/jetbrains/kotlin) |
+| 17 | [Lua](https://www.lua.org) | Claimed | 🟢 1 | ✅ Yes | [lua](https://hub.docker.com/_/lua) |
+| 18 | [Mojo](https://www.modular.com/mojo) | Open | 🔴 5 | ⚠️ Limited | No official Docker image yet; requires setup with Modular's environment |
+| 19 | [R](https://www.r-project.org) | Skylar | 🟠 3 | ✅ Yes | [r-base](https://hub.docker.com/_/r-base) |
+| 20 | [Rust](https://www.rust-lang.org) | Tobenna Ahanotu | 🔴 5 | ✅ Yes | [rust](https://hub.docker.com/_/rust) |
+| 21 | [Scala](https://www.scala-lang.org) | Keith Roberts | 🔴 4 | ✅ Yes | [scala](https://hub.docker.com/_/hseeberger/scala-sbt) |
+| 22 | [TypeScript](https://www.typescriptlang.org) | Open | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
+| 23 | [Whitespace](https://esolangs.org/wiki/Whitespace) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
+| 24 | [Zig](https://ziglang.org) | Cameron | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
 
-Let me know if you need any additional modifications!
+Now everything is sorted and includes the references. Let me know if you need any more tweaks! 🚀
