@@ -18,9 +18,10 @@
 | 16 | [Kotlin](https://kotlinlang.org) | Open | 🟢 2 | ✅ Yes | [kotlin](https://hub.docker.com/r/jetbrains/kotlin) |
 | 17 | [Lua](https://www.lua.org) | Claimed | 🟢 1 | ✅ Yes | [lua](https://hub.docker.com/_/lua) |
 | 18 | [Mojo](https://www.modular.com/mojo) | Open | 🔴 5 | ⚠️ Limited | No official Docker image yet; requires setup with Modular's environment |
-| 19 | [R](https://www.r-project.org) | Skylar | 🟠 3 | ✅ Yes | [r-base](https://hub.docker.com/_/r-base) |
-| 20 | [Rust](https://www.rust-lang.org) | Tobenna Ahanotu | 🔴 5 | ✅ Yes | [rust](https://hub.docker.com/_/rust) |
-| 21 | [Scala](https://www.scala-lang.org) | Keith Roberts | 🔴 4 | ✅ Yes | [scala](https://hub.docker.com/_/hseeberger/scala-sbt) |
-| 22 | [TypeScript](https://www.typescriptlang.org) | Open | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
-| 23 | [Whitespace](https://esolangs.org/wiki/Whitespace) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
-| 24 | [Zig](https://ziglang.org) | Cameron Williams | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
+| 19 | [OCaml](https://ocaml.org) | Open | 🔴 4 | ✅ Yes | [ocaml](https://hub.docker.com/_/ocaml) |
+| 20 | [R](https://www.r-project.org) | Skylar | 🟠 3 | ✅ Yes | [r-base](https://hub.docker.com/_/r-base) |
+| 21 | [Rust](https://www.rust-lang.org) | Tobenna Ahanotu | 🔴 5 | ✅ Yes | [rust](https://hub.docker.com/_/rust) |
+| 22 | [Scala](https://www.scala-lang.org) | Keith Roberts | 🔴 4 | ✅ Yes | [scala](https://hub.docker.com/_/hseeberger/scala-sbt) |
+| 23 | [TypeScript](https://www.typescriptlang.org) | Open | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
+| 24 | [Whitespace](https://esolangs.org/wiki/Whitespace) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
+| 25 | [Zig](https://ziglang.org) | Cameron Williams | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
