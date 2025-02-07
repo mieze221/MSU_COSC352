@@ -23,4 +23,4 @@
 | 21 | [Scala](https://www.scala-lang.org) | Keith Roberts | 🔴 4 | ✅ Yes | [scala](https://hub.docker.com/_/hseeberger/scala-sbt) |
 | 22 | [TypeScript](https://www.typescriptlang.org) | Open | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
 | 23 | [Whitespace](https://esolangs.org/wiki/Whitespace) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
-| 24 | [Zig](https://ziglang.org) | Cameron | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
+| 24 | [Zig](https://ziglang.org) | Cameron Williams | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
