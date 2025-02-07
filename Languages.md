@@ -1,9 +1,7 @@
-Here's the updated table sorted alphabetically and including the site references for Brainfuck and Whitespace:  
-
 | #  | Language  | Assigned | Difficulty (1-5) | Docker Support | Official Docker Image / Docs |
 |----|----------|----------|-----------------|---------------|----------------------|
 | 1  | [Ballerina](https://ballerina.io) | Open | 🟢 2 | ✅ Yes | [ballerina/docker-ballerina](https://hub.docker.com/r/ballerina/ballerina) |
-| 2  | [Brainfuck](https://esolangs.org/wiki/Brainfuck) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
+|<span style="background-color: #ffcccc">2</span>  | [Brainfuck](https://esolangs.org/wiki/Brainfuck) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
 | 3  | [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) | Jordan Bigby | 🟢 2 | ✅ Yes | [mcr.microsoft.com/dotnet](https://hub.docker.com/_/microsoft-dotnet-sdk) |
 | 4  | [Ceylon](https://ceylon-lang.org) | Open | 🔴 4 | ⚠️ Limited | No official image; can be set up manually with OpenJDK |
 | 5  | [Clojure](https://clojure.org) | Kaitlyn Pearson | 🔴 4 | ✅ Yes | [clojure](https://hub.docker.com/_/clojure) |
@@ -26,5 +24,3 @@ Here's the updated table sorted alphabetically and including the site references
 | 22 | [TypeScript](https://www.typescriptlang.org) | Open | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
 | 23 | [Whitespace](https://esolangs.org/wiki/Whitespace) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
 | 24 | [Zig](https://ziglang.org) | Cameron | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
-
-Now everything is sorted and includes the references. Let me know if you need any more tweaks! 🚀
