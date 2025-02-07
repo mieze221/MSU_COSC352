@@ -1,7 +1,7 @@
 | #  | Language  | Assigned | Difficulty (1-5) | Docker Support | Official Docker Image / Docs |
 |----|----------|----------|-----------------|---------------|----------------------|
 | 1  | [Ballerina](https://ballerina.io) | Open | 🟢 2 | ✅ Yes | [ballerina/docker-ballerina](https://hub.docker.com/r/ballerina/ballerina) |
-|<span style="background-color: #ffcccc">2</span>  | [Brainfuck](https://esolangs.org/wiki/Brainfuck) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
+| 2  | [Brainfuck](https://esolangs.org/wiki/Brainfuck) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
 | 3  | [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) | Jordan Bigby | 🟢 2 | ✅ Yes | [mcr.microsoft.com/dotnet](https://hub.docker.com/_/microsoft-dotnet-sdk) |
 | 4  | [Ceylon](https://ceylon-lang.org) | Open | 🔴 4 | ⚠️ Limited | No official image; can be set up manually with OpenJDK |
 | 5  | [Clojure](https://clojure.org) | Kaitlyn Pearson | 🔴 4 | ✅ Yes | [clojure](https://hub.docker.com/_/clojure) |
