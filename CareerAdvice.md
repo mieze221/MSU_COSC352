@@ -4,4 +4,4 @@
 
 [How to Become a Great Software Developer — Best Advice from Top-Notch Engineers](https://www.youtube.com/watch?v=suATPK45sjk)
 
-[No BS Advise for Software Engineers](https://www.youtube.com/watch?v=ga3nYHWtS14)
+[No BS Advice for Software Engineers](https://www.youtube.com/watch?v=ga3nYHWtS14)
