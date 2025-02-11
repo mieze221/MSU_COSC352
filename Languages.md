@@ -16,7 +16,7 @@
 | 14 | [Haskell](https://www.haskell.org) | Open | 🔴 5 | ✅ Yes | [haskell](https://hub.docker.com/_/haskell) |
 | 15 | [Julia](https://julialang.org) | Jaylon Williams| 🟠 3 | ✅ Yes | [julia](https://hub.docker.com/_/julia) |
 | 16 | [Kotlin](https://kotlinlang.org) | Kalonji Stephens | 🟢 2 | ✅ Yes | [kotlin](https://hub.docker.com/r/jetbrains/kotlin) |
-| 17 | [Lua](https://www.lua.org) | Claimed | 🟢 1 | ✅ Yes | [lua](https://hub.docker.com/_/lua) |
+| 17 | [Lua](https://www.lua.org) | Micheal Orishagbemi | 🟢 1 | ✅ Yes | [lua](https://hub.docker.com/_/lua) |
 | 18 | [Mojo](https://www.modular.com/mojo) | Open | 🔴 5 | ⚠️ Limited | No official Docker image yet; requires setup with Modular's environment |
 | 19 | [OCaml](https://ocaml.org) | Open | 🔴 4 | ✅ Yes | [ocaml](https://hub.docker.com/_/ocaml) |
 | 20 | [R](https://www.r-project.org) | Skylar | 🟠 3 | ✅ Yes | [r-base](https://hub.docker.com/_/r-base) |
