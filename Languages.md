@@ -6,7 +6,7 @@
 | 4  | [Ceylon](https://ceylon-lang.org) | Open | 🔴 4 | ⚠️ Limited | No official image; can be set up manually with OpenJDK |
 | 5  | [Clojure](https://clojure.org) | Kaitlyn Pearson | 🔴 4 | ✅ Yes | [clojure](https://hub.docker.com/_/clojure) |
 | 6  | [D](https://dlang.org) | Delancy Johnson | 🟠 3 | ✅ Yes | [dlang](https://hub.docker.com/_/dlang) |
-| 7  | [Dart](https://dart.dev) | Open | 🟢 2 | ✅ Yes | [dart](https://hub.docker.com/_/dart) |
+| 7  | [Dart](https://dart.dev) | Mehki Freeman | 🟢 2 | ✅ Yes | [dart](https://hub.docker.com/_/dart) |
 | 8  | [Elixir](https://elixir-lang.org) | Omar Farabee | 🟠 3 | ✅ Yes | [elixir](https://hub.docker.com/_/elixir) |
 | 9  | [Erlang](https://www.erlang.org) | Open | 🔴 5 | ✅ Yes | [erlang](https://hub.docker.com/_/erlang) |
 | 10 | [Gleam](https://gleam.run) | Open | 🟠 3 | ⚠️ Limited | No official image; can be set up manually using Erlang/Elixir images |
