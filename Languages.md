@@ -11,7 +11,7 @@
 | 9  | [Erlang](https://www.erlang.org) | Open | 🔴 5 | ✅ Yes | [erlang](https://hub.docker.com/_/erlang) |
 | 10 | [Gleam](https://gleam.run) | Open | 🟠 3 | ⚠️ Limited | No official image; can be set up manually using Erlang/Elixir images |
 | 11 | [Go](https://golang.org) | Open | 🟢 2 | ✅ Yes | [golang](https://hub.docker.com/_/golang) |
-| 12 | [Groovy](https://groovy-lang.org) | Open | 🟢 2 | ✅ Yes | [groovy](https://hub.docker.com/_/groovy) |
+| 12 | [Groovy](https://groovy-lang.org) | Amos Dorbor | 🟢 2 | ✅ Yes | [groovy](https://hub.docker.com/_/groovy) |
 | 13 | [Hack](https://hacklang.org) | Open | 🟠 3 | ⚠️ Limited | No official image; can be run with HHVM ([hhvm/hhvm](https://hub.docker.com/r/hhvm/hhvm)) |
 | 14 | [Haskell](https://www.haskell.org) | Open | 🔴 5 | ✅ Yes | [haskell](https://hub.docker.com/_/haskell) |
 | 15 | [Julia](https://julialang.org) | Jaylon Williams| 🟠 3 | ✅ Yes | [julia](https://hub.docker.com/_/julia) |
@@ -22,6 +22,6 @@
 | 20 | [R](https://www.r-project.org) | Skylar | 🟠 3 | ✅ Yes | [r-base](https://hub.docker.com/_/r-base) |
 | 21 | [Rust](https://www.rust-lang.org) | Tobenna Ahanotu | 🔴 5 | ✅ Yes | [rust](https://hub.docker.com/_/rust) |
 | 22 | [Scala](https://www.scala-lang.org) | Keith Roberts | 🔴 4 | ✅ Yes | [scala](https://hub.docker.com/_/hseeberger/scala-sbt) |
-| 23 | [TypeScript](https://www.typescriptlang.org) | Open | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
+| 23 | [TypeScript](https://www.typescriptlang.org) | Nicholaus Somerville | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
 | 24 | [Whitespace](https://esolangs.org/wiki/Whitespace) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
 | 25 | [Zig](https://ziglang.org) | Cameron Williams | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
