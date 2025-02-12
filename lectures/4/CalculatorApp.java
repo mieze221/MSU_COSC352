@@ -1,27 +1,61 @@
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Scanner;
 
-class Calculator {
-    // Example method
+interface Calculator {
+    int add(int a, int b);
+    int mult(int a, int b);
+    int sub(int a, int b);
+    int divide(int a, int b);
+    int doubleUp(int a, int b);
+}
+
+class CalculatorImpl implements Calculator {
     public int add(int a, int b) {
         return a + b;
     }
-    public int multiply(int a, int b) {
+    public int mult(int a, int b) {
         return a * b;
     }
-
-    public int subtract(int a, int b) {
+    public int sub(int a, int b) {
         return a - b;
     }
-
+    public int divide(int a, int b) {
+        return a / b;
+    }
     public int doubleUp(int a, int b) {
-        return 2 * (a * b);
+        for(int i=1; i<10000; i++){}
+        
+        return a + b;
+    }
+}
+
+class TimingInvocationHandler implements InvocationHandler {
+    private final Object target;
+
+    public TimingInvocationHandler(Object target) {
+        this.target = target;
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        long startTime = System.nanoTime();
+        Object result = method.invoke(target, args);
+        long endTime = System.nanoTime();
+        System.out.println("Execution time: " + (endTime - startTime) + " ns");
+        return result;
     }
 }
 
 public class CalculatorApp {
     public static void main(String[] args) {
-        Calculator calculator = new Calculator();
+        Calculator calculator = (Calculator) Proxy.newProxyInstance(
+            Calculator.class.getClassLoader(),
+            new Class<?>[]{Calculator.class},
+            new TimingInvocationHandler(new CalculatorImpl())
+        );
+
         Class<?> clazz = calculator.getClass();
         Method[] methods = clazz.getDeclaredMethods();
         Scanner scanner = new Scanner(System.in);
@@ -29,8 +63,8 @@ public class CalculatorApp {
         while (true) {
             System.out.println("Available operations:");
             for (Method method : methods) {
-                if (method.getParameterCount() == 2 && method.getParameterTypes()[0] == int.class) {
-                    System.out.println("\t-> " + method.getName() + " int int");
+                if (method.getParameterCount() == 2) {
+                    System.out.println("- " + method.getName() + " (int, int)");
                 }
             }
             System.out.println("Enter method name and arguments (or 'exit' to quit):");
@@ -51,10 +85,13 @@ public class CalculatorApp {
                 int num1 = Integer.parseInt(parts[1]);
                 int num2 = Integer.parseInt(parts[2]);
                 
-                Method method = clazz.getMethod(methodName, int.class, int.class);
-                Object result = method.invoke(calculator, num1, num2);
-                System.out.println("Result: " + result);
-                System.out.print("\n");
+                if (methodName.equalsIgnoreCase("all")) {
+                    executeAllOperations(calculator, num1, num2);
+                } else {
+                    Method method = Calculator.class.getMethod(methodName, int.class, int.class);
+                    Object result = method.invoke(calculator, num1, num2);
+                    System.out.println("Result: " + result);
+                }
             } catch (NoSuchMethodException e) {
                 System.out.println("Operation doesn't exist");
             } catch (Exception e) {
@@ -62,5 +99,19 @@ public class CalculatorApp {
             }
         }
         scanner.close();
+    }
+
+    private static void executeAllOperations(Calculator calculator, int num1, int num2) {
+        Method[] methods = Calculator.class.getMethods();
+        for (Method method : methods) {
+            if (method.getParameterCount() == 2) {
+                try {
+                    Object result = method.invoke(calculator, num1, num2);
+                    System.out.println(method.getName() + "(" + num1 + ", " + num2 + ") = " + result);
+                } catch (Exception e) {
+                    System.out.println("Error executing " + method.getName() + ": " + e.getMessage());
+                }
+            }
+        }
     }
 }
