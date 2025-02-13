@@ -1,6 +1,6 @@
 | #  | Language  | Assigned | Difficulty (1-5) | Docker Support | Official Docker Image / Docs |
 |----|----------|----------|-----------------|---------------|----------------------|
-| 1  | [Ballerina](https://ballerina.io) | Open | 🟢 2 | ✅ Yes | [ballerina/docker-ballerina](https://hub.docker.com/r/ballerina/ballerina) |
+| 1  | [Ballerina](https://ballerina.io) | Ty Steward | 🟢 2 | ✅ Yes | [ballerina/docker-ballerina](https://hub.docker.com/r/ballerina/ballerina) |
 | 2  | [Brainfuck](https://esolangs.org/wiki/Brainfuck) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
 | 3  | [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) | Jordan Bigby | 🟢 2 | ✅ Yes | [mcr.microsoft.com/dotnet](https://hub.docker.com/_/microsoft-dotnet-sdk) |
 | 4  | [Ceylon](https://ceylon-lang.org) | Open | 🔴 4 | ⚠️ Limited | No official image; can be set up manually with OpenJDK |
@@ -9,10 +9,10 @@
 | 7  | [Dart](https://dart.dev) | Mehki Freeman | 🟢 2 | ✅ Yes | [dart](https://hub.docker.com/_/dart) |
 | 8  | [Elixir](https://elixir-lang.org) | Omar Farabee | 🟠 3 | ✅ Yes | [elixir](https://hub.docker.com/_/elixir) |
 | 9  | [Erlang](https://www.erlang.org) | Open | 🔴 5 | ✅ Yes | [erlang](https://hub.docker.com/_/erlang) |
-| 10 | [Gleam](https://gleam.run) | Open | 🟠 3 | ⚠️ Limited | No official image; can be set up manually using Erlang/Elixir images |
+| 10 | [Gleam](https://gleam.run) | Fawas Adelekan | 🟠 3 | ⚠️ Limited | No official image; can be set up manually using Erlang/Elixir images |
 | 11 | [Go](https://golang.org) | Open | 🟢 2 | ✅ Yes | [golang](https://hub.docker.com/_/golang) |
 | 12 | [Groovy](https://groovy-lang.org) | Amos Dorbor | 🟢 2 | ✅ Yes | [groovy](https://hub.docker.com/_/groovy) |
-| 13 | [Hack](https://hacklang.org) | Open | 🟠 3 | ⚠️ Limited | No official image; can be run with HHVM ([hhvm/hhvm](https://hub.docker.com/r/hhvm/hhvm)) |
+| 13 | [Hack](https://hacklang.org) | Nia Webster | 🟠 3 | ⚠️ Limited | No official image; can be run with HHVM ([hhvm/hhvm](https://hub.docker.com/r/hhvm/hhvm)) |
 | 14 | [Haskell](https://www.haskell.org) | Open | 🔴 5 | ✅ Yes | [haskell](https://hub.docker.com/_/haskell) |
 | 15 | [Julia](https://julialang.org) | Jaylon Williams| 🟠 3 | ✅ Yes | [julia](https://hub.docker.com/_/julia) |
 | 16 | [Kotlin](https://kotlinlang.org) | Kalonji Stephens | 🟢 2 | ✅ Yes | [kotlin](https://hub.docker.com/r/jetbrains/kotlin) |
