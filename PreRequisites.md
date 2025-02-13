@@ -48,6 +48,10 @@ https://www.youtube.com/watch?v=vxTW22y8zV8
 
 https://www.youtube.com/watch?v=eId6K8d0v6o
 
+RUST Docker 
+
+https://dev.to/rogertorres/first-steps-with-docker-rust-30oi
+
 
 
 
