@@ -1,15 +1,7 @@
 import java.util.Scanner;
 import java.lang.reflect.Method;
 
-interface Calculator {
-    int add(int a, int b);
-    int mult(int a, int b);
-    int sub(int a, int b);
-    int divide(int a, int b);
-    int doubleUp(int a, int b);
-}
-
-class CalculatorImpl implements Calculator {
+class Calculator {
     public int add(int a, int b) {
         return a + b;
     }
@@ -32,7 +24,7 @@ class CalculatorImpl implements Calculator {
 
 public class SimpleCalculatorApp {
     public static void main(String[] args) {
-        Calculator calculator = new CalculatorImpl();
+        Calculator calculator = new Calculator();
         Class<?> clazz = calculator.getClass();
         Method[] methods = clazz.getDeclaredMethods();
         Scanner scanner = new Scanner(System.in);

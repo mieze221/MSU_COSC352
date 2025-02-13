@@ -32,16 +32,37 @@ class Measurement {
     }
 
     Measurement plus(Measurement other) {
-        if (this.unitType() != other.unitType()) {
-            throw new IllegalArgumentException("Cannot add different unit types: ${this.unit} and ${other.unit}")
-        }
         double totalBase = this.toBase() + other.toBase()
         return new Measurement(totalBase / conversionFactors[this.unit], this.unit)
     }
 
-    String unitType() {
-        def unitGroups = [['inches', 'feet', 'yards', 'miles', 'cm', 'meters']]
-        unitGroups.find { this.unit in it }
+    Measurement minus(Measurement other) {
+        double totalBase = this.toBase() - other.toBase()
+        return new Measurement(totalBase / conversionFactors[this.unit], this.unit)
+    }
+
+    Measurement getFeet() {
+        return this.convertTo("feet")
+    }
+    
+    Measurement getInches() {
+        return this.convertTo("inches")
+    }
+    
+    Measurement getYards() {
+        return this.convertTo("yards")
+    }
+    
+    Measurement getMiles() {
+        return this.convertTo("miles")
+    }
+    
+    Measurement getCm() {
+        return this.convertTo("cm")
+    }
+    
+    Measurement getMeters() {
+        return this.convertTo("meters")
     }
 
     String toString() {
@@ -61,10 +82,15 @@ Number.metaClass.getMeters = { -> new Measurement(delegate, 'meters') }
 def result = 5.feet + 6.inches
 println result  // Output: 5.5 feet
 
+// Convert the result
+def convertedResult = result.meters
+println convertedResult  // Output: Converted value in meters
+
 def result2 = 2.yards + 12.inches
-println result2  // Output: 2.3333333333333335 yards
+println result2  // Output: 2.333 yards
+
+def result21 = 2.yards - 12.inches
+println result21  
 
 def result3 = 1.miles + 500.feet
-println result3.convertTo("feet")  // Output: 6050.0 feet
-
-println result3.feet
+println result3.feet  // Output: 6050.0 feet
