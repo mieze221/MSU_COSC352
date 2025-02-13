@@ -18,7 +18,7 @@
 | 16 | [Kotlin](https://kotlinlang.org) | Kalonji Stephens | 🟢 2 | ✅ Yes | [kotlin](https://hub.docker.com/r/jetbrains/kotlin) |
 | 17 | [Lua](https://www.lua.org) | Micheal Orishagbemi | 🟢 1 | ✅ Yes | [lua](https://hub.docker.com/_/lua) |
 | 18 | [Mojo](https://www.modular.com/mojo) | Open | 🔴 5 | ⚠️ Limited | No official Docker image yet; requires setup with Modular's environment |
-| 19 | [OCaml](https://ocaml.org) | Open | 🔴 4 | ✅ Yes | [ocaml](https://hub.docker.com/_/ocaml) |
+| 19 | [OCaml](https://ocaml.org) | Xavier Baines | 🔴 4 | ✅ Yes | [ocaml](https://hub.docker.com/_/ocaml) |
 | 20 | [R](https://www.r-project.org) | Skylar | 🟠 3 | ✅ Yes | [r-base](https://hub.docker.com/_/r-base) |
 | 21 | [Rust](https://www.rust-lang.org) | Tobenna Ahanotu | 🔴 5 | ✅ Yes | [rust](https://hub.docker.com/_/rust) |
 | 22 | [Scala](https://www.scala-lang.org) | Keith Roberts | 🔴 4 | ✅ Yes | [scala](https://hub.docker.com/_/hseeberger/scala-sbt) |
