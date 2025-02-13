@@ -41,6 +41,11 @@ class TimingInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         long startTime = System.nanoTime();
+
+        for (int i=0; i<100000000; i++) {
+          System.out.println(i);
+        }
+
         Object result = method.invoke(target, args);
         long endTime = System.nanoTime();
         System.out.println("Execution time: " + (endTime - startTime) + " ns");

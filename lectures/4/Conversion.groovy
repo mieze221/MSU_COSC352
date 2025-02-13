@@ -66,5 +66,3 @@ println result2  // Output: 2.3333333333333335 yards
 
 def result3 = 1.miles + 500.feet
 println result3.convertTo("feet")  // Output: 6050.0 feet
-
-println result3.feet

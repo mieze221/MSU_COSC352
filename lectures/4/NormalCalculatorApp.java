@@ -12,6 +12,10 @@ class NormalCalculator  {
     public int multiply(int a, int b) {
         return a * b;
     }
+
+    public int crazyOperation(int a, int b) {
+        return (-1) * (99) + (a) + (3*b);
+    }
     
     public int divide(int a, int b) {
         if (b == 0) {
@@ -27,7 +31,7 @@ public class NormalCalculatorApp {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Enter operation (add, subtract, multiply, divide) followed by two numbers (or 'exit' to quit):");
+            System.out.println("Enter operation (add, subtract, multiply, divide, crazy) followed by two numbers (or 'exit' to quit):");
             
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("exit")) {
@@ -60,6 +64,9 @@ public class NormalCalculatorApp {
                         break;
                     case "divide":
                         result = calculator.divide(num1, num2);
+                        break;
+                    case "crazy":
+                        result = calculator.crazyOperation(num1, num2);
                         break;
                     default:
                         System.out.println("Invalid operation.");

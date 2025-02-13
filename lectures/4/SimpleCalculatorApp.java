@@ -17,8 +17,11 @@ class Calculator {
         }
         return a / b;
     }
-    public int doubleUp(int a, int b) {
-        return a + b;
+    public int crazy1(int a, int b) {
+        return a - b + -9;
+    }
+    public int crazy2(int a, int b) {
+        return a - b - 88;
     }
 }
 
