@@ -8,7 +8,7 @@
 | 6  | [D](https://dlang.org) | Delancy Johnson | 🟠 3 | ✅ Yes | [dlang](https://hub.docker.com/_/dlang) |
 | 7  | [Dart](https://dart.dev) | Mehki Freeman | 🟢 2 | ✅ Yes | [dart](https://hub.docker.com/_/dart) |
 | 8  | [Elixir](https://elixir-lang.org) | Omar Farabee | 🟠 3 | ✅ Yes | [elixir](https://hub.docker.com/_/elixir) |
-| 9  | [Erlang](https://www.erlang.org) | Open | 🔴 5 | ✅ Yes | [erlang](https://hub.docker.com/_/erlang) |
+| 9  | [Erlang](https://www.erlang.org) | Claimed | 🔴 5 | ✅ Yes | [erlang](https://hub.docker.com/_/erlang) |
 | 10 | [Gleam](https://gleam.run) | Fawas Adelekan | 🟠 3 | ⚠️ Limited | No official image; can be set up manually using Erlang/Elixir images |
 | 11 | [Go](https://golang.org) | Etinosa Ogbeide | 🟢 2 | ✅ Yes | [golang](https://hub.docker.com/_/golang) |
 | 12 | [Groovy](https://groovy-lang.org) | Amos Dorbor | 🟢 2 | ✅ Yes | [groovy](https://hub.docker.com/_/groovy) |
