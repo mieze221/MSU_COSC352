@@ -26,3 +26,5 @@
 | 24 | [Whitespace](https://esolangs.org/wiki/Whitespace) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
 | 25 | [Zig](https://ziglang.org) | Cameron Williams | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
 | 26 | [Crystal](https://crystal-lang.org/) | Emmanuel Adeleke | 🟠 3 | ✅ Yes | [crystal](https://hub.docker.com/r/crystallang/crystal)|
+| 27 | [Xtend](https://www.eclipse.org/xtend/) | Open | 🟠 3 | ⚠️ Limited | No official image; can be set up manually with OpenJDK |
+| 28 | [Nim](https://nim-lang.org/) | Open | 🟠 3 | ✅ Yes | [nimlang/nim](https://hub.docker.com/r/nimlang/nim) |
