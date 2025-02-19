@@ -25,4 +25,4 @@
 | 23 | [TypeScript](https://www.typescriptlang.org) | Nicholaus Somerville | 🟢 2 | ✅ Yes | [node](https://hub.docker.com/_/node) (TypeScript runs via Node.js) |
 | 24 | [Whitespace](https://esolangs.org/wiki/Whitespace) | Open | 🔴 5 | ⚠️ Limited | No official image; can be set up manually |
 | 25 | [Zig](https://ziglang.org) | Cameron Williams | 🔴 5 | ⚠️ Limited | No official image; can be set up manually with Alpine/Ubuntu |
-| 25 | [Crystal](https://crystal-lang.org/) | Emmanuel Adeleke |  | | [crystal](https://hub.docker.com/r/crystallang/crystal)|
+| 26 | [Crystal](https://crystal-lang.org/) | Emmanuel Adeleke | 🟠 3 | ✅ Yes | [crystal](https://hub.docker.com/r/crystallang/crystal)|
