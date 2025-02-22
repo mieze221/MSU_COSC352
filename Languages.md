@@ -13,7 +13,7 @@
 | 11 | [Go](https://golang.org) | Etinosa Ogbeide | 🟢 2 | ✅ Yes | [golang](https://hub.docker.com/_/golang) |
 | 12 | [Groovy](https://groovy-lang.org) | Amos Dorbor | 🟢 2 | ✅ Yes | [groovy](https://hub.docker.com/_/groovy) |
 | 13 | [Hack](https://hacklang.org) | Nia Webster | 🟠 3 | ⚠️ Limited | No official image; can be run with HHVM ([hhvm/hhvm](https://hub.docker.com/r/hhvm/hhvm)) |
-| 14 | [Haskell](https://www.haskell.org) | Open | 🔴 5 | ✅ Yes | [haskell](https://hub.docker.com/_/haskell) |
+| 14 | [Haskell](https://www.haskell.org) | Paul Enyi | 🔴 5 | ✅ Yes | [haskell](https://hub.docker.com/_/haskell) |
 | 15 | [Julia](https://julialang.org) | Jaylon Williams| 🟠 3 | ✅ Yes | [julia](https://hub.docker.com/_/julia) |
 | 16 | [Kotlin](https://kotlinlang.org) | Kalonji Stephens | 🟢 2 | ✅ Yes | [kotlin](https://hub.docker.com/r/jetbrains/kotlin) |
 | 17 | [Lua](https://www.lua.org) | Micheal Orishagbemi | 🟢 1 | ✅ Yes | [lua](https://hub.docker.com/_/lua) |
