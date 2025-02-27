@@ -24,7 +24,7 @@ for project_path in "$PROJECTS_DIR"/*/; do
             continue
         fi
         
-        image_name="project_${project_num}_${user_name}"
+        image_name="project_${project_num}:${user_name}"
         images+=("$image_name")
         image_dirs+=("$user_dir")
 
