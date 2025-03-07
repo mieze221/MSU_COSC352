@@ -8,4 +8,4 @@ WORKDIR /appdocker info
 COPY Hello_Paul.py /app/.
 
 # Define the command to run the script with arguments
-ENTRYPOINT ["python", "Hello_Paul.py"]
+ENTRYPOINT ["python", "/app/Hello_Paul.py"]
