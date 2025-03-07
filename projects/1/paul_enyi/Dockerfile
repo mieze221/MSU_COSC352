@@ -2,10 +2,10 @@
 FROM python:3.11
 
 # Set the working directory inside the container
-WORKDIR /appdocker info
+WORKDIR /app
 
 # Copy the script into the container's working directory
-COPY Hello_Paul.py /app/.
+COPY Hello_Paul.py .
 
-# Define the command to run the script with arguments
+# Define the command to run the script
 ENTRYPOINT ["python", "/app/Hello_Paul.py"]
