@@ -8,4 +8,4 @@ WORKDIR /app
 COPY hello.jl /app/hello.jl
 
 # Set the default command to run the script
-CMD ["julia", "/app/hello.jl"]
+ENTRYPOINT ["julia", "/app/hello.jl"]
