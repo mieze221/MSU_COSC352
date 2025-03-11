@@ -9,3 +9,4 @@ COPY hello.jl /app/hello.jl
 
 # Set the default command to run the script
 ENTRYPOINT ["julia", "/app/hello.jl"]
+CMD []
