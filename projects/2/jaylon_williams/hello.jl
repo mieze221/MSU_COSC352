@@ -1,18 +1,19 @@
 function main()
     
-    if length(ARGS) < 4 || ARGS[1] != "--name" || ARGS[3] != "--number"
-        println("Usage: julia hello.jl --name <name> --number <number>")
-        return
-    end
-
-    name = ARGS[2]
-    number = parse(Int, ARGS[4])  
-
-    for _ in 1:number
-        println("Hello $name")
-    end
+    if length(ARGS) != 2
+    println("Usage: julia hello.jl <name> <number>")
+    exit(1)
 end
 
-if abspath(PROGRAM_FILE) == abspath(@__FILE__)
-    main()
+name = ARGS[1]
+num = try
+    parse(Int, ARGS[2])
+catch
+    println("Error: Second argument must be an integer.")
+    exit(1)
+end
+
+# Print the greeting multiple times
+for _ in 1:num
+    println("Hello $name")
 end
