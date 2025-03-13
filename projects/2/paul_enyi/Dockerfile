@@ -1,17 +1,11 @@
 # Use the official Haskell image
-FROM haskell:latest
+FROM haskell:8
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy the Haskell script into the container
-COPY Haskell-project2.hs .
-
-# Install necessary Haskell tools
-RUN apt-get update && apt-get install -y ghc cabal-install
-
-# Ensure runghc is in PATH
-ENV PATH="/root/.ghcup/bin:${PATH}"
+COPY haskell-project2.hs .
 
 # Set the default command to run the script
-ENTRYPOINT ["runhaskell", "Haskell-project2.hs"]
+ENTRYPOINT ["runhaskell", "haskell-project2.hs"]
