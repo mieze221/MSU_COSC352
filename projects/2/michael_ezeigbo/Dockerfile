@@ -1,11 +1,14 @@
-# Use the official Python image from Docker Hub
-FROM python:3.9-slim
+# Use the official Go image from Docker Hub
+FROM golang:1.18-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Python script into the container
-COPY hello.py /app
+# Copy the Go source code into the container
+COPY hello.go /app
 
-# Set the default command to run the Python script
-CMD ["python", "hello.py"]
+# Build the Go program inside the container
+RUN go build -o hello hello.go
+
+# Set the default command to run the Go program
+CMD ["./hello"]
