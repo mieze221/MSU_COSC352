@@ -41,12 +41,12 @@ class TableParser(HTMLParser):
             self.current_cell += data.strip() + " "
 
 # # Step 1: Download the HTML page
-# url = "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue"
-# html_file = "page.html"
+url = "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue"
+html_file = "page.html"
 
-# urllib.request.urlretrieve(url, html_file)
+urllib.request.urlretrieve(url, html_file)
 
-html_file = "list_of_largest_companies_wiki.html"
+#html_file = "list_of_largest_companies_wiki.html"
 # Step 2: Parse the HTML page
 with open(html_file, "r", encoding="utf-8") as file:
     html_content = file.read()
