@@ -1,14 +1,11 @@
-# Use the official Nim base image
-FROM nimlang/nim:latest
+# Use the official Python image from Docker Hub
+FROM python:3.9-slim
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Nim source code into the container
-COPY hello.nim .
+# Copy the Python script into the container
+COPY hello.py /app
 
-# Compile the Nim source code
-RUN nim compile --verbosity:0 --compileOnly hello.nim
-
-# Run the compiled program
-ENTRYPOINT ["./hello"]
+# Set the default command to run the Python script
+CMD ["python", "hello.py"]
