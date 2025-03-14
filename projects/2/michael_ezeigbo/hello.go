@@ -33,4 +33,3 @@ func main() {
 		fmt.Printf("Hello %s!\n", name)
 	}
 	fmt.Printf("Greeting process completed for %s.\n", name)
-}
