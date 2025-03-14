@@ -1,28 +1,30 @@
-# Use the official Crystal Docker image as the base
-FROM crystallang/crystal:latest
+# Use Alpine as the base image
+FROM alpine:latest
 
-# Set the working directory in the container to /app
+# Set the working directory
 WORKDIR /app
 
-# Install required dependencies for the project
-RUN apt-get update && apt-get install -y \
-  curl \
-  build-essential \
-  libssl-dev \
-  libyaml-dev \
-  zlib1g-dev
+# Install Crystal and required dependencies
+RUN apk add --no-cache crystal shards build-base libffi-dev yaml-dev zlib-dev openssl-dev git
 
-# Copy the entire project into the container
+# Copy the Crystal script and HTML file into the container
 COPY . /app
 
-# Install dependencies (if using shards)
-RUN shards install
+# Compile the Crystal program (static binary)
+RUN crystal build extract_tables.cr --release --static
 
-# Build the Crystal application (if required)
-RUN crystal build hello.cr --release
+# Ensure the compiled binary is executable
+RUN chmod +x extract_tables
 
-# Command to run the Crystal program when the container starts
-CMD ["./hello"]
+# Create a non-root user and set the ownership of the application directory
+RUN adduser -D -g '' -h /app -s /bin/sh appuser
+RUN chown -R appuser:appuser /app
 
-# Expose any necessary ports (optional, depending on your application)
-EXPOSE 8080
+# Switch to the non-root user
+USER appuser
+
+# Define a volume to store extracted CSV files
+VOLUME ["/app"]
+
+# Set the default command to run the compiled binary
+CMD ["crystal", "run", "extract_tables.cr"]
