@@ -1,7 +1,3 @@
-Perfect. Here's the **updated full project description** for **Project 4**, incorporating your caveats and enforcing good software engineering principles:
-
----
-
 ## **Project 4: Multi-URL HTML Table Extractor with Sequential and Multithreaded Execution**
 
 ### **Objective**
@@ -96,7 +92,3 @@ Projects/4/<firstname>_<lastname>/
 - Clean, reusable, and well-structured code.
 - Proper use of Git and Docker.
 - Adherence to native-library-only restriction.
-
----
-
-Let me know if you'd like a **starter template or scaffolding** in a specific language (e.g., Python, Java, Go), or help writing tests or the `Dockerfile`.
