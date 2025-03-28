@@ -1,5 +1,5 @@
 FROM golang:1.21-alpine
 WORKDIR /app
-COPY hello.go
+COPY hello.go .
 RUN go build -o hello hello.go
 CMD ["./hello"]
