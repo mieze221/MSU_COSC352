@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// Download the HTML content from a URL
+
 func downloadHTML(url string) (string, error) {
 	resp, err := http.Get(url)
 	if err != nil {
@@ -25,7 +25,7 @@ func downloadHTML(url string) (string, error) {
 	return sb.String(), nil
 }
 
-// Parse the HTML content and extract tables
+
 func extractTablesFromHTML(htmlContent string) ([][][]string, error) {
 	var tables [][][]string
 	tokenizer := html.NewTokenizer(strings.NewReader(htmlContent))
@@ -44,13 +44,13 @@ func extractTablesFromHTML(htmlContent string) ([][][]string, error) {
 			token := tokenizer.Token()
 			switch token.Data {
 			case "table":
-				currentTable = [][]string{} // Start a new table
+				currentTable = [][]string{} 
 				isTable = true
 			case "tr":
-				currentRow = []string{} // Start a new row
+				currentRow = []string{} 
 				isRow = true
 			case "td", "th":
-				// Do nothing for cells, we'll fill data when we encounter text
+				
 			}
 		case html.TextToken:
 			if isRow {
@@ -75,7 +75,7 @@ func extractTablesFromHTML(htmlContent string) ([][][]string, error) {
 	}
 }
 
-// Write each table to a separate CSV file
+
 func writeToCSV(table [][]string, index int) error {
 	fileName := fmt.Sprintf("table_%d.csv", index+1)
 	file, err := os.Create(fileName)
