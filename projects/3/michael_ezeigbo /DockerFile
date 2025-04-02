@@ -1,17 +1,14 @@
-# Use the official Python image from Docker Hub
-FROM python:3.9-slim
+# Step 1: Use an official Golang image as the base image
+FROM golang:1.18-alpine
 
-# Set the working directory inside the container
+# Step 2: Set the working directory inside the container
 WORKDIR /app
 
-# Copy the script into the container's /app directory
-COPY extract_tables.py /app/
+# Step 3: Copy the Go source code into the container
+COPY extract_tables.go /app/
 
-# Make the script executable (optional)
-RUN chmod +x extract_tables.py
+# Step 4: Build the Go application
+RUN go build -o extract_tables extract_tables.go
 
-# Install any required dependencies
-# For this simple project, we don't need external libraries
-
-# Set the default command to run the script
-CMD ["python", "extract_tables.py"]
+# Step 5: Set the command to run the application
+CMD ["./extract_tables"]
