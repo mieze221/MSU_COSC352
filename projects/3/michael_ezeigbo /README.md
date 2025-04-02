@@ -3,7 +3,6 @@
 This Go program downloads an HTML file from a given URL, extracts all the tables, and writes each table to a separate CSV file in the project directory.
 
 ## Requirements
-
 - Go 1.20 or higher
 - Docker
 
