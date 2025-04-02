@@ -1,0 +1,17 @@
+# Use the official Python image from Docker Hub
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the script into the container's /app directory
+COPY extract_tables.py /app/
+
+# Make the script executable (optional)
+RUN chmod +x extract_tables.py
+
+# Install any required dependencies
+# For this simple project, we don't need external libraries
+
+# Set the default command to run the script
+CMD ["python", "extract_tables.py"]
