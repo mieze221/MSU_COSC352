@@ -8,7 +8,7 @@ This project implements a Go program that extracts tables from multiple HTML sou
 The program measures and reports the execution time for both modes and handles errors gracefully (e.g., network issues, file not found, malformed HTML).
 
 ## Directory Structure
-Projects/4/<michael>_<ezeigbo>/
+Projects/4/michael_ezeigbo/
 ├── Dockerfile
 ├── extract_tables.go
 ├── README.md
