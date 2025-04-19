@@ -1,9 +1,9 @@
-FROM python:3.9-slim
+FROM golang:1.21 AS builder
 
 WORKDIR /app
 
-COPY requirements.txt . RUN pip install --no-cache-dir -r requirements.txt
+COPY go.mod ./ COPY go.sum ./ RUN go mod download
 
-COPY . .
+COPY . . RUN go build -o extract_tables extract_tables.go
 
-CMD ["python", "extract_tables.py"]
+FROM gcr.io/distroless/base COPY --from=builder /app/extract_tables /app/ COPY --from=builder /app/data /app/data WORKDIR /app CMD ["./extract_tables"]
