@@ -353,6 +353,8 @@ def process_url(url):
         # Generate a filename based on URL and table caption
         filename = generate_filename(url, i+1, table['caption'])
         
+        filename = f"/output/{filename}"
+
         # Write table to CSV
         if write_table_to_csv(table, filename):
             csv_files.append(filename)
