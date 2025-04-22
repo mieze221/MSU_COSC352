@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
 """
-Wikipedia Table Parser
+Wikipedia Table to CSV Parser
 
-This script downloads a Wikipedia page from a provided URL and extracts all tables
-found in the HTML content, converting them to lists of dictionaries. It's optimized
-for parsing Wikipedia tables including handling of complex formatting elements.
+This script downloads a Wikipedia page from a provided URL, extracts all tables
+found in the HTML content, and writes each table to a CSV file in the local directory.
+Filenames are generated based on the input URL and table captions or positions.
 
 Usage:
-    python wiki_table_parser.py <url>
+    python wiki_table_to_csv.py <url>
 
 Example:
-    python wiki_table_parser.py https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue
+    python wiki_table_to_csv.py https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue
 """
 
 import sys
 import re
+import os
+import csv
 import urllib.request
+import urllib.parse
 import html.parser
 import json
 
@@ -106,6 +109,7 @@ class WikiTableParser(html.parser.HTMLParser):
                 if self.headers:
                     dict_table = {
                         'caption': self.current_caption,
+                        'headers': self.headers.copy(),
                         'data': []
                     }
                     
@@ -130,6 +134,7 @@ class WikiTableParser(html.parser.HTMLParser):
                     # If no headers were found, store as a list of rows with caption
                     self.tables.append({
                         'caption': self.current_caption,
+                        'headers': [],
                         'data': self.current_table
                     })
                     
@@ -240,18 +245,81 @@ def parse_tables(html_content):
         html_content (str): The HTML content to parse.
         
     Returns:
-        list: A list of tables, where each table is a list of dictionaries.
+        list: A list of tables, where each table is a dict with caption, headers, and data.
     """
     parser = WikiTableParser()
     parser.feed(html_content)
     return parser.get_tables()
 
 
+def generate_filename(url, table_index, caption):
+    """
+    Generate a filename for a CSV file based on the URL and table information.
+    
+    Args:
+        url (str): The source URL.
+        table_index (int): The index of the table on the page.
+        caption (str): The caption of the table, if any.
+    
+    Returns:
+        str: A valid filename for the CSV file.
+    """
+    # Extract domain and path from URL
+    parsed_url = urllib.parse.urlparse(url)
+    domain = parsed_url.netloc.replace('.', '_')
+    
+    # Get the last part of the path
+    path = parsed_url.path.strip('/').replace('/', '_')
+    
+    # Create a base filename
+    base_filename = f"{domain}_{path}"
+    
+    # Clean up the caption for use in a filename
+    if caption:
+        clean_caption = re.sub(r'[^\w\s-]', '', caption).strip().replace(' ', '_')
+        # Limit length of caption in filename
+        if len(clean_caption) > 50:
+            clean_caption = clean_caption[:50]
+        if clean_caption:
+            return f"{base_filename}_table_{table_index}_{clean_caption}.csv"
+    
+    # Default if no usable caption
+    return f"{base_filename}_table_{table_index}.csv"
+
+
+def write_table_to_csv(table, filename):
+    """
+    Write a table to a CSV file.
+    
+    Args:
+        table (dict): The table containing headers and data.
+        filename (str): The name of the CSV file to write.
+    """
+    try:
+        with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+            if table['headers']:
+                # If we have headers, use them as column names
+                fieldnames = table['headers']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                for row in table['data']:
+                    writer.writerow(row)
+            else:
+                # If no headers, use CSV writer without dictionaries
+                writer = csv.writer(csvfile)
+                for row in table['data']:
+                    writer.writerow(row)
+        return True
+    except Exception as e:
+        print(f"Error writing to {filename}: {e}", file=sys.stderr)
+        return False
+
+
 def main():
     """Main function to handle command line arguments and process the URL."""
     # Check if URL is provided
     if len(sys.argv) != 2:
-        print("Usage: python wiki_table_parser.py <url>", file=sys.stderr)
+        print("Usage: python wiki_table_to_csv.py <url>", file=sys.stderr)
         sys.exit(1)
     
     url = sys.argv[1]
@@ -263,12 +331,23 @@ def main():
     # Parse tables from HTML content
     tables = parse_tables(html_content)
     
-    # Output the tables
+    # Output the tables to CSV files
     if not tables:
         print("No tables found on the page.")
     else:
         print(f"Found {len(tables)} tables on the page.")
-        print(json.dumps(tables, indent=2))
+        
+        csv_files = []
+        for i, table in enumerate(tables):
+            # Generate a filename based on URL and table caption
+            filename = generate_filename(url, i+1, table['caption'])
+            
+            # Write table to CSV
+            if write_table_to_csv(table, filename):
+                csv_files.append(filename)
+                print(f"Table {i+1} written to {filename}")
+        
+        print(f"\nSuccessfully wrote {len(csv_files)} tables to CSV files.")
 
 
 if __name__ == "__main__":
