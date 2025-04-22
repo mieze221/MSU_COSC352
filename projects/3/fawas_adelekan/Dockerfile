@@ -1,4 +1,4 @@
-FROM michalhodur/gleam
+FROM michalhodur/gleam:latest
 
 
 
@@ -7,6 +7,7 @@ FROM michalhodur/gleam
 WORKDIR /app
 
 
+RUN gleam --version 
 
 # Initialize a new Gleam project named "hello"
 
