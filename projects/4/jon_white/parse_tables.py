@@ -22,6 +22,9 @@ import urllib.parse
 import html.parser
 import json
 
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 
 class WikiTableParser(html.parser.HTMLParser):
     """
@@ -366,47 +369,68 @@ def main():
         sys.exit(1)
     
     # Split the input into individual URLs
-    urls = sys.argv[1].split(',')
+    urls = [u.strip() for u in sys.argv[1].split(',') if u.strip()]
     
-    # Validate and clean URLs
+    # Validate URLs
     valid_urls = []
     for url in urls:
-        url = url.strip()
-        if url:
-            try:
-                # Simple validation
-                result = urllib.parse.urlparse(url)
-                if all([result.scheme, result.netloc]):
-                    valid_urls.append(url)
-                else:
-                    print(f"Skipping invalid URL: {url}")
-            except Exception:
-                print(f"Skipping invalid URL: {url}")
+        try:
+            result = urllib.parse.urlparse(url)
+            if result.scheme and result.netloc:
+                valid_urls.append(url)
+            else:
+                print(f"Skipping invalid URL: {url}", file=sys.stderr)
+        except Exception:
+            print(f"Skipping invalid URL: {url}", file=sys.stderr)
     
     if not valid_urls:
-        print("No valid URLs provided.")
+        print("No valid URLs provided.", file=sys.stderr)
         sys.exit(1)
     
-    print(f"Processing {len(valid_urls)} URLs...")
+    print(f"Processing {len(valid_urls)} URLs...\n")
     
-    # Process each URL
-    results = []
+    # ---- Sequential run ----
+    start_seq = time.perf_counter()
+    seq_results = []
     for url in valid_urls:
-        result = process_url(url)
-        results.append(result)
+        seq_results.append(process_url(url))
+    end_seq = time.perf_counter()
+    duration_seq = end_seq - start_seq
+    print(f"\nSequential run completed in {duration_seq:.2f} seconds.\n")
     
-    # Show summary
-    print("\n----- Summary -----")
-    total_tables = 0
-    total_files = 0
+    # Summarize sequential results
+    total_tables_seq = sum(r[1] for r in seq_results)
+    total_files_seq  = sum(len(r[2]) for r in seq_results)
+    print("Sequential Summary:")
+    for url, num_tables, files in seq_results:
+        print(f"  {url}: {num_tables} tables, {len(files)} CSV files")
+    print(f"  → Total: {total_tables_seq} tables, {total_files_seq} files\n")
     
-    for url, num_tables, files in results:
-        print(f"{url}: {num_tables} tables, {len(files)} CSV files")
-        total_tables += num_tables
-        total_files += len(files)
+    # ---- Threaded run ----
+    start_thr = time.perf_counter()
+    thr_results = []
+    # you can choose max_workers to tune concurrency; here we use len(valid_urls)
+    with ThreadPoolExecutor(max_workers=len(valid_urls)) as executor:
+        future_to_url = {executor.submit(process_url, url): url for url in valid_urls}
+        for future in as_completed(future_to_url):
+            thr_results.append(future.result())
+    end_thr = time.perf_counter()
+    duration_thr = end_thr - start_thr
+    print(f"\nThreaded run completed in {duration_thr:.2f} seconds.\n")
     
-    print(f"\nTotal: {total_tables} tables processed, {total_files} CSV files created.")
-
+    # Summarize threaded results
+    total_tables_thr = sum(r[1] for r in thr_results)
+    total_files_thr  = sum(len(r[2]) for r in thr_results)
+    print("Threaded Summary:")
+    for url, num_tables, files in thr_results:
+        print(f"  {url}: {num_tables} tables, {len(files)} CSV files")
+    print(f"  → Total: {total_tables_thr} tables, {total_files_thr} files\n")
+    
+    # ---- Compare ----
+    print("Performance Comparison:")
+    print(f"  Sequential: {duration_seq:.2f}s")
+    print(f"  Threaded:   {duration_thr:.2f}s")
+    print("\nDone.")
 
 if __name__ == "__main__":
     main()
