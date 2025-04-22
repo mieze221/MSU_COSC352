@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Wikipedia Table to CSV Parser
+Multi-URL Table to CSV Parser
 
-This script downloads a Wikipedia page from a provided URL, extracts all tables
+This script downloads multiple webpages from provided comma-separated URLs, extracts all tables
 found in the HTML content, and writes each table to a CSV file in the local directory.
 Filenames are generated based on the input URL and table captions or positions.
 
 Usage:
-    python wiki_table_to_csv.py <url>
+    python multi_url_table_to_csv.py <url1,url2,url3,...>
 
 Example:
-    python wiki_table_to_csv.py https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue
+    python multi_url_table_to_csv.py https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue,https://en.wikipedia.org/wiki/Fortune_Global_500
 """
 
 import sys
@@ -218,7 +218,7 @@ def download_url(url):
         url (str): The URL to download.
         
     Returns:
-        str: The HTML content of the page.
+        str: The HTML content of the page, or None if download failed.
     """
     try:
         # Create a request with a user agent to avoid being blocked
@@ -234,7 +234,7 @@ def download_url(url):
             return response.read().decode('utf-8', errors='replace')
     except Exception as e:
         print(f"Error downloading URL {url}: {e}", file=sys.stderr)
-        sys.exit(1)
+        return None
 
 
 def parse_tables(html_content):
@@ -294,6 +294,9 @@ def write_table_to_csv(table, filename):
     Args:
         table (dict): The table containing headers and data.
         filename (str): The name of the CSV file to write.
+        
+    Returns:
+        bool: True if file was written successfully, False otherwise.
     """
     try:
         with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
@@ -315,39 +318,94 @@ def write_table_to_csv(table, filename):
         return False
 
 
-def main():
-    """Main function to handle command line arguments and process the URL."""
-    # Check if URL is provided
-    if len(sys.argv) != 2:
-        print("Usage: python wiki_table_to_csv.py <url>", file=sys.stderr)
-        sys.exit(1)
+def process_url(url):
+    """
+    Process a single URL: download content, parse tables, and write to CSV files.
     
-    url = sys.argv[1]
-    print(f"Downloading and parsing tables from {url}...")
+    Args:
+        url (str): The URL to process.
+        
+    Returns:
+        tuple: (url, number of tables found, list of CSV files created)
+    """
+    print(f"\nProcessing URL: {url}")
     
     # Download the URL content
     html_content = download_url(url)
+    if html_content is None:
+        return url, 0, []
     
     # Parse tables from HTML content
     tables = parse_tables(html_content)
     
     # Output the tables to CSV files
     if not tables:
-        print("No tables found on the page.")
-    else:
-        print(f"Found {len(tables)} tables on the page.")
+        print(f"No tables found on {url}")
+        return url, 0, []
+    
+    print(f"Found {len(tables)} tables on {url}")
+    
+    csv_files = []
+    for i, table in enumerate(tables):
+        # Generate a filename based on URL and table caption
+        filename = generate_filename(url, i+1, table['caption'])
         
-        csv_files = []
-        for i, table in enumerate(tables):
-            # Generate a filename based on URL and table caption
-            filename = generate_filename(url, i+1, table['caption'])
-            
-            # Write table to CSV
-            if write_table_to_csv(table, filename):
-                csv_files.append(filename)
-                print(f"Table {i+1} written to {filename}")
-        
-        print(f"\nSuccessfully wrote {len(csv_files)} tables to CSV files.")
+        # Write table to CSV
+        if write_table_to_csv(table, filename):
+            csv_files.append(filename)
+            print(f"  Table {i+1} written to {filename}")
+    
+    return url, len(tables), csv_files
+
+
+def main():
+    """Main function to handle command line arguments and process the URLs."""
+    # Check if URLs are provided
+    if len(sys.argv) != 2:
+        print("Usage: python multi_url_table_to_csv.py <url1,url2,url3,...>", file=sys.stderr)
+        sys.exit(1)
+    
+    # Split the input into individual URLs
+    urls = sys.argv[1].split(',')
+    
+    # Validate and clean URLs
+    valid_urls = []
+    for url in urls:
+        url = url.strip()
+        if url:
+            try:
+                # Simple validation
+                result = urllib.parse.urlparse(url)
+                if all([result.scheme, result.netloc]):
+                    valid_urls.append(url)
+                else:
+                    print(f"Skipping invalid URL: {url}")
+            except Exception:
+                print(f"Skipping invalid URL: {url}")
+    
+    if not valid_urls:
+        print("No valid URLs provided.")
+        sys.exit(1)
+    
+    print(f"Processing {len(valid_urls)} URLs...")
+    
+    # Process each URL
+    results = []
+    for url in valid_urls:
+        result = process_url(url)
+        results.append(result)
+    
+    # Show summary
+    print("\n----- Summary -----")
+    total_tables = 0
+    total_files = 0
+    
+    for url, num_tables, files in results:
+        print(f"{url}: {num_tables} tables, {len(files)} CSV files")
+        total_tables += num_tables
+        total_files += len(files)
+    
+    print(f"\nTotal: {total_tables} tables processed, {total_files} CSV files created.")
 
 
 if __name__ == "__main__":
