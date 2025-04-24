@@ -2,10 +2,10 @@
 FROM gcc:latest
 
 
-WORKDIR /app
+WORKDIR /usr/src/omar_farabee
 
 
-COPY . /app
+COPY . /usr/src/omar_farabee
 
 
 RUN g++ -o app project352.cpp
