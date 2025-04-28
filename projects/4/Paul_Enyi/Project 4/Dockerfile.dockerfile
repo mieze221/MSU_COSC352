@@ -1,9 +1,10 @@
-
 FROM haskell:8
 
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y curl
+
+RUN cabal update && cabal install --lib http-conduit
 
 COPY MultiUrlTableExtractor.hs ./
 
