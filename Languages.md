@@ -10,7 +10,7 @@
 | 8  | [Elixir](https://elixir-lang.org) | Omar Farabee | 🟠 3 | ✅ Yes | [elixir](https://hub.docker.com/_/elixir) |
 | 9  | [Erlang](https://www.erlang.org) | Claimed | 🔴 5 | ✅ Yes | [erlang](https://hub.docker.com/_/erlang) |
 | 10 | [Gleam](https://gleam.run) | Fawas Adelekan | 🟠 3 | ⚠️ Limited | No official image; can be set up manually using Erlang/Elixir images |
-| 11 | [Go](https://golang.org) | Etinosa Ogbeide | 🟢 2 | ✅ Yes | [golang](https://hub.docker.com/_/golang) |
+| 11 | [Go](https://golang.org) | Etinosa Ogbeide, Tiana Miller | 🟢 2 | ✅ Yes | [golang](https://hub.docker.com/_/golang) |
 | 12 | [Groovy](https://groovy-lang.org) | Amos Dorbor | 🟢 2 | ✅ Yes | [groovy](https://hub.docker.com/_/groovy) |
 | 13 | [Hack](https://hacklang.org) | Nia Webster | 🟠 3 | ⚠️ Limited | No official image; can be run with HHVM ([hhvm/hhvm](https://hub.docker.com/r/hhvm/hhvm)) |
 | 14 | [Haskell](https://www.haskell.org) | Paul Enyi | 🔴 5 | ✅ Yes | [haskell](https://hub.docker.com/_/haskell) |
