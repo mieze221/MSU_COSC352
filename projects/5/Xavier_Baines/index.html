@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WASM Hello</title>
+    <script>
+      // Define Module before loading hello.js
+      var Module = {
+        onRuntimeInitialized: function () {
+          console.log("✅ WASM runtime initialized");
+
+          const greet = Module.cwrap("greet", "number", ["string", "number", "number"]);
+          const freeBuffer = Module.cwrap("free_buffer", null, ["number"]);
+
+          document.getElementById("greetForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            console.log("📨 Form submitted");
+
+            const name = document.getElementById("name").value;
+            const age = parseInt(document.getElementById("age").value);
+            const count = parseInt(document.getElementById("repeat").value);
+
+            const ptr = greet(name, age, count);
+            const message = Module.UTF8ToString(ptr);
+            console.log("📤 Output from WASM:", message);
+
+            document.getElementById("output").innerText = message;
+            freeBuffer(ptr);
+          });
+        }
+      };
+    </script>
+    <script src="hello.js"></script>
+  </head>
+  <body>
+    <h1>Interactive Hello with WASM</h1>
+    <form id="greetForm">
+      <input type="text" id="name" placeholder="Name" required />
+      <input type="number" id="age" placeholder="Age" required />
+      <input type="number" id="repeat" placeholder="Repeat Count" min="1" required />
+      <button type="submit">Submit</button>
+    </form>
+    <pre id="output"></pre>
+  </body>
+</html>

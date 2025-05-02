@@ -1,0 +1,4 @@
+{
+  "EXPORTED_FUNCTIONS": ["_greet", "_free_buffer"],
+  "EXPORTED_RUNTIME_METHODS": ["cwrap", "UTF8ToString"]
+}
