@@ -1,0 +1,42 @@
+## Objective:
+
+Build a WebAssembly module (in Rust or C) exposing a single function:
+greet(name: string, age: uint32, count: uint32) → pointer to UTF-8 string
+
+that returns:
+Hello, [Name]. You are [Age] years old.
+Hello, [Name]. You are [Age] years old.
+…  (repeated [count] times)
+
+The host (JavaScript) will call this, read out the returned C-string, display it in the DOM, then free the allocated buffer.
+
+## File Structure:
+
+```
+paul-enyi
+├── hello.c          # WebAssembly source (C)
+├── hello.js         # Compiled JS glue code from Emscripten
+├── hello.wasm       # Compiled WebAssembly binary
+├── index.html       # Web UI with input form
+```
+## How to Run the Project
+
+1.Start a local HTTP server:
+
+```bash
+npm install -g serve
+serve . -l 8080
+```
+2. Click either local or network:
+
+```bash
+
+   │Serving!                                  │
+   │                                          │
+   │   - Local:    http://localhost:8080      │
+   │   - Network:  http://192.168.1.43:8080   │
+   │                                          │
+   │   Copied local address to clipboard!     │
+
+```
+###
