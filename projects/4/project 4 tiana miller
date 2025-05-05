@@ -1,0 +1,153 @@
+package main
+
+import (
+	"encoding/csv"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"strings"
+	"sync"
+	"time"
+
+	"golang.org/x/net/html"
+)
+
+func downloadHTML(url string) (string, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	return string(body), err
+}
+
+func extractTables(htmlContent string) [][][]string {
+	doc, err := html.Parse(strings.NewReader(htmlContent))
+	if err != nil {
+		return nil
+	}
+	var tables [][][]string
+	var f func(*html.Node)
+	f = func(n *html.Node) {
+		if n.Type == html.ElementNode && n.Data == "table" {
+			var table [][]string
+			for tr := n.FirstChild; tr != nil; tr = tr.NextSibling {
+				if tr.Type == html.ElementNode && tr.Data == "tr" {
+					var row []string
+					for td := tr.FirstChild; td != nil; td = td.NextSibling {
+						if td.Type == html.ElementNode && (td.Data == "td" || td.Data == "th") {
+							text := extractText(td)
+							if text != "" {
+								row = append(row, text)
+							}
+						}
+					}
+					if len(row) > 0 {
+						table = append(table, row)
+					}
+				}
+			}
+			if len(table) > 0 {
+				tables = append(tables, table)
+			}
+		}
+		for c := n.FirstChild; c != nil; c = c.NextSibling {
+			f(c)
+		}
+	}
+	f(doc)
+	return tables
+}
+
+func extractText(n *html.Node) string {
+	if n.Type == html.TextNode {
+		return strings.TrimSpace(n.Data)
+	}
+	var result string
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		result += extractText(c)
+	}
+	return strings.TrimSpace(result)
+}
+
+func writeTableToCSV(table [][]string, label string, index int) error {
+	filename := fmt.Sprintf("%s_table_%d.csv", label, index)
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+	for _, row := range table {
+		writer.Write(row)
+	}
+	fmt.Println(filename, "created.")
+	return nil
+}
+
+func extractTablesFromSource(url, label string) {
+	htmlContent, err := downloadHTML(url)
+	if err != nil {
+		fmt.Println("Error downloading:", url, err)
+		return
+	}
+	tables := extractTables(htmlContent)
+	for i, table := range tables {
+		writeTableToCSV(table, label, i+1)
+	}
+}
+
+func runSequential(sources []string) {
+	fmt.Println("\n🔹 Running Sequential Mode...")
+	start := time.Now()
+	for i, url := range sources {
+		label := fmt.Sprintf("revenue_url%d", i+1)
+		extractTablesFromSource(url, label)
+	}
+	duration := time.Since(start)
+	fmt.Printf("Sequential Execution Time: %.2f seconds\n", duration.Seconds())
+}
+
+func runMultithreaded(sources []string) {
+	fmt.Println("\n🔹 Running Multithreaded Mode...")
+	start := time.Now()
+	var wg sync.WaitGroup
+	for i, url := range sources {
+		wg.Add(1)
+		label := fmt.Sprintf("revenue_url%d", i+1)
+		go func(u, l string) {
+			defer wg.Done()
+			extractTablesFromSource(u, l)
+		}(url, label)
+	}
+	wg.Wait()
+	duration := time.Since(start)
+	fmt.Printf("Multithreaded Execution Time: %.2f seconds\n", duration.Seconds())
+}
+
+func main() {
+	sources := []string{
+		"https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue",
+		"https://en.wikipedia.org/wiki/List_of_largest_companies_by_revenue",
+	}
+
+	runSequential(sources)
+	runMultithreaded(sources)
+}
+
+FROM golang:1.20-alpine
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+
+RUN go build -o app .
+
+CMD ["./app"]
