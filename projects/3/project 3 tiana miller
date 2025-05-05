@@ -1,0 +1,142 @@
+project/
+├── go.mod
+└── main.go
+
+module project
+
+go 1.20
+
+require golang.org/x/net v0.17.0
+
+package main
+
+import (
+	"encoding/csv"
+	"fmt"
+	"net/http"
+	"os"
+	"strings"
+
+	"golang.org/x/net/html"
+)
+
+func downloadHTML(url string) (*html.Node, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	root, err := html.Parse(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	return root, nil
+}
+
+func extractTables(n *html.Node, tables *[][][]string) {
+	if n.Type == html.ElementNode && n.Data == "table" {
+		var currentTable [][]string
+		for tr := n.FirstChild; tr != nil; tr = tr.NextSibling {
+			if tr.Type == html.ElementNode && tr.Data == "tr" {
+				var row []string
+				for td := tr.FirstChild; td != nil; td = td.NextSibling {
+					if td.Type == html.ElementNode && (td.Data == "td" || td.Data == "th") {
+						row = append(row, extractText(td))
+					}
+				}
+				if len(row) > 0 {
+					currentTable = append(currentTable, row)
+				}
+			}
+		}
+		if len(currentTable) > 0 {
+			*tables = append(*tables, currentTable)
+		}
+	}
+
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		extractTables(c, tables)
+	}
+}
+
+func extractText(n *html.Node) string {
+	if n.Type == html.TextNode {
+		return strings.TrimSpace(n.Data)
+	}
+	var result string
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		result += extractText(c)
+	}
+	return strings.TrimSpace(result)
+}
+
+func writeTableToCSV(table [][]string, index int) error {
+	filename := fmt.Sprintf("table_%d.csv", index)
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+
+	for _, row := range table {
+		err := writer.Write(row)
+		if err != nil {
+			return err
+		}
+	}
+	fmt.Println(filename, "created.")
+	return nil
+}
+
+func main() {
+	url := "https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue"
+	root, err := downloadHTML(url)
+	if err != nil {
+		fmt.Println("Error downloading HTML:", err)
+		return
+	}
+
+	var tables [][][]string
+	extractTables(root, &tables)
+
+	for i, table := range tables {
+		err := writeTableToCSV(table, i+1)
+		if err != nil {
+			fmt.Println("Error writing CSV:", err)
+		}
+	}
+}
+
+cd project
+go mod tidy     # pulls any missing dependencies
+go run main.go  # runs the program
+
+DOCKER FILE
+FROM golang:1.20-alpine
+
+WORKDIR /app
+
+COPY go.mod ./
+COPY go.sum ./
+
+RUN go mod download
+
+COPY . .
+
+RUN go build -o app .
+
+CMD ["./app"]
+
+project/
+├── go.mod
+├── go.sum
+├── main.go
+└── Dockerfile   <-- place this here
+
+docker build -t go-table-extractor .
+
+docker run --rm go-table-extractor
