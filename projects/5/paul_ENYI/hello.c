@@ -1,44 +1,29 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <emscripten.h>
 
 EMSCRIPTEN_KEEPALIVE
-char* greet(const char* name, int age, int repeat_count) {
+char* make_greeting(const char* name, int age, int repeat_count) {
     if (repeat_count <= 0) repeat_count = 1;
-    
-    char single_greeting[256];
-    int greeting_len = snprintf(single_greeting, sizeof(single_greeting), 
-                               "Hello %s, you are %d years old!", name, age);
-    
-    size_t total_size = (greeting_len + 1) * repeat_count + 1; 
+
+    const char* template = "Hello, %s. You are %d years old.\n";
+    int single_len = snprintf(NULL, 0, template, name, age);
+    size_t total_size = single_len * repeat_count + 1;
+
     char* result = (char*)malloc(total_size);
     if (!result) return NULL;
-    
-    result[0] = '\0';
-    
-    char* current_pos = result;
+
+    char* current = result;
     for (int i = 0; i < repeat_count; i++) {
-        strcpy(current_pos, single_greeting);
-        current_pos += greeting_len;
-        
-        if (i < repeat_count - 1) {
-            *current_pos = '\n';
-            current_pos++;
-        }
+        int written = sprintf(current, template, name, age);
+        current += written;
     }
-    
-    *current_pos = '\0';
-    
+
     return result;
 }
 
 EMSCRIPTEN_KEEPALIVE
-void free_buffer(char* ptr) {
+void free_memory(char* ptr) {
     free(ptr);
-}
-
-int main() {
-    printf("WASM module initialized\n");
-    return 0;
 }

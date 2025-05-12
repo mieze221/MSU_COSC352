@@ -1,138 +1,98 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>WASM Hello</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      
-      form {
-        margin: 20px 0;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-      }
-      
-      .form-group {
-        margin-bottom: 10px;
-      }
-      
-      label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-      
-      input {
-        padding: 8px;
-        width: 100%;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      
-      button {
-        padding: 10px 15px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-      
-      button:hover {
-        background-color: #45a049;
-      }
-      
-      pre {
-        background-color: #f5f5f5;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        margin-top: 20px;
-      }
-      
-      .status {
-        color: #666;
-        font-style: italic;
-        margin-bottom: 10px;
-      }
-    </style>
-    
-    <script>
-      var Module = {
-        onRuntimeInitialized: function () {
-          document.getElementById('status').textContent = "✅ WASM module initialized and ready!";
-          console.log("✅ WASM runtime initialized");
-          
-          document.getElementById('submitBtn').disabled = false;
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM Greeting Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input {
+      width: 100%;
+      padding: 6px;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    #output {
+      margin-top: 20px;
+      background: #f5f5f5;
+      padding: 15px;
+      border: 1px solid #ddd;
+      white-space: pre-wrap;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WASM Greeting Generator</h1>
+
+  <form id="input-form">
+    <label for="name-input">Name:</label>
+    <input type="text" id="name-input" required>
+
+    <label for="age-input">Age:</label>
+    <input type="number" id="age-input" required>
+
+    <label for="repeat-input">Repeat Count:</label>
+    <input type="number" id="repeat-input" required>
+
+    <button type="submit">Generate Greeting</button>
+  </form>
+
+  <h2>Output:</h2>
+  <div id="output">Greeting will appear here...</div>
+
+  <!-- Load WASM Module (must match compiled output file name) -->
+  <script src="hello_wasm.js"></script>
+  <script>
+    Module.onRuntimeInitialized = () => {
+      const makeGreeting = Module.cwrap("make_greeting", "number", ["string", "number", "number"]);
+      const freeMemory = Module.cwrap("free_memory", null, ["number"]);
+
+      document.getElementById("input-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name-input").value;
+        const age = parseInt(document.getElementById("age-input").value);
+        const repeat = parseInt(document.getElementById("repeat-input").value);
+        const output = document.getElementById("output");
+
+        if (!name || isNaN(age) || isNaN(repeat) || repeat < 1) {
+          output.textContent = "Please fill in all fields correctly.";
+          return;
         }
-      };
-    </script>
-    <script src="hello.js"></script>
-  </head>
-  <body>
-    <h1>Interactive Hello with WebAssembly</h1>
-    <p>This demo uses C code compiled to WebAssembly to generate greetings.</p>
-    
-    <div id="status" class="status">Loading WASM module...</div>
-    
-    <form id="greetForm">
-      <div class="form-group">
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" placeholder="Enter your name" required />
-      </div>
-      
-      <div class="form-group">
-        <label for="age">Your Age:</label>
-        <input type="number" id="age" placeholder="Enter your age" min="1" max="150" required />
-      </div>
-      
-      <div class="form-group">
-        <label for="repeat">Repeat Count:</label>
-        <input type="number" id="repeat" placeholder="How many times to repeat" min="1" value="3" required />
-      </div>
-      
-      <button type="submit" id="submitBtn" disabled>Generate Greeting</button>
-    </form>
-    
-    <h2>Output:</h2>
-    <pre id="output">(Submit the form to see the greeting)</pre>
-    
-    <script>
-      document.getElementById('greetForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        console.log("📨 Form submitted");
-        
-        const name = document.getElementById('name').value.trim();
-        const age = parseInt(document.getElementById('age').value, 10);
-        const repeat = parseInt(document.getElementById('repeat').value, 10);
-        
-        try {
-          const greet = Module.cwrap("greet", "number", ["string", "number", "number"]);
-          const freeBuffer = Module.cwrap("free_buffer", null, ["number"]);
-          
-          const ptr = greet(name, age, repeat);
-          
-          const message = Module.UTF8ToString(ptr);
-          console.log("📤 Output from WASM:", message);
-          
-          document.getElementById('output').textContent = message;
-          
-          freeBuffer(ptr);
-        } catch (error) {
-          console.error("Error calling WASM function:", error);
-          document.getElementById('output').textContent = "Error: " + error.message;
+
+        const ptr = makeGreeting(name, age, repeat);
+        if (!ptr) {
+          output.textContent = "WASM memory allocation failed.";
+          return;
         }
+
+        const result = Module.UTF8ToString(ptr);
+        output.textContent = result;
+        freeMemory(ptr);
       });
-    </script>
-  </body>
+    };
+  </script>
+</body>
 </html>
